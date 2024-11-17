@@ -8,6 +8,9 @@ pipeline {
     environment {
         CI = 'true'
     }
+    triggers {
+        pollSCM(*/2 * * * *) // every 2 minutes
+    }
     stages {
         stage('Build') {
             steps {
