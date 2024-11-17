@@ -9,7 +9,7 @@ pipeline {
         CI = 'true'
     }
     triggers {
-        pollSCM(*/2 * * * *)
+        pollSCM('*/2 * * * *')
     }
     stages {
         stage('Build') {
