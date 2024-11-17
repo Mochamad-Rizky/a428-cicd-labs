@@ -8,9 +8,6 @@ pipeline {
     environment {
         CI = 'true'
     }
-    triggers {
-        pollSCM('*/2 * * * *')
-    }
     stages {
         stage('Build') {
             steps {
