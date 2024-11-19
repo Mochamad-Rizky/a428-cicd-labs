@@ -1,28 +1,23 @@
-node {
-    def dockerImage
-    
-    try {
-        stage('Setup') {
-            // Configure Docker agent
-            dockerImage = docker.image('node:lts-buster-slim')
-            dockerImage.pull()
-            
-            dockerImage.inside('-p 3000:3000') {
-                // Set environment variable
-                env.CI = 'true'
-                
-                stage('Build') {
-                    sh 'npm install'
-                }
-                
-                stage('Test') {
-                    sh './jenkins/scripts/test.sh'
-                }
+pipeline {
+    agent {
+        docker {
+            image 'node:lts-buster-slim'
+            args '-p 3000:3000'
+        }
+    }
+    environment {
+        CI = 'true'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'npm install'
             }
         }
-    } catch (e) {
-        // Handle any errors
-        currentBuild.result = 'FAILED'
-        throw e
+        stage('Test') {
+            steps {
+                sh './jenkins/scripts/test.sh'
+            }
+        }
     }
 }
