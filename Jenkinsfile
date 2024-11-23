@@ -41,8 +41,8 @@ pipeline {
             steps {
                 sshagent(credentials: ['1d660cae-20a2-41e2-b380-ee6962a8c6c3']) {
                     // join to ec2
-                    sh 'ssh -o StrictHostKeyChecking=no -l ubuntu ec2-54-86-109-143.compute-1.amazonaws.com'
-                    sh 'ls'
+                    sh 'ssh ubuntu@ec2-54-86-109-143.compute-1.amazonaws.com'
+                    sh 'whoami'
                 }
             }
         }
