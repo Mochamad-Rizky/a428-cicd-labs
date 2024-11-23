@@ -45,7 +45,7 @@ pipeline {
                     def ec2_key = './submission-ci-cd.pem'
                 
                     sh """
-                    ssh -i ${ec2_user}@${ec2_ip}
+                    ssh -i ${ec2_key} ${ec2_user}@${ec2_ip}
                     mkdir -p /home/ubuntu/app && cd /home/ubuntu/app
                     git clone https://github.com/Mochamad-Rizky/a428-cicd-labs -b react-app && cd react-app
                     npm install
