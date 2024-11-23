@@ -39,10 +39,10 @@ pipeline {
         
         stage('Deploy to EC2') {
             steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AKIAXKPUZ3MI5T3WDQ42')]) {
-                    sh '''
-                        aws --version
-                    '''
+                sshagent(['1d660cae-20a2-41e2-b380-ee6962a8c6c3']) {
+                    // join to ec2
+                    sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-54-86-109-143.compute-1.amazonaws.com'
+                    sh 'ls'
                 }
             }
         }
