@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'ec2-agent' }
+    agent { label 'amazon-linux' }
     stages {
         stage('Setup') {
             steps {
