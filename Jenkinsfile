@@ -39,11 +39,11 @@ pipeline {
         
         stage('Deploy to EC2') {
             steps {
-                def ec2_ip = 'ec2-54-86-109-143.compute-1.amazonaws.com'
-                def ec2_user = 'ubuntu'
-                def ec2_key = './submission-ci-cd.pem'
+                script {
+                    def ec2_ip = 'ec2-54-86-109-143.compute-1.amazonaws.com'
+                    def ec2_user = 'ubuntu'
+                    def ec2_key = './submission-ci-cd.pem'
                 
-                sshagent(['ec2-ssh-key']) {
                     sh """
                     ssh -o StrictHostKeyChecking=no ${ec2_user}@${ec2_ip} << EOF
                     mkdir -p /home/ubuntu/app && cd /home/ubuntu/app
@@ -53,6 +53,7 @@ pipeline {
                     EOF
                     """
                 }
+
             }
         }
     }
