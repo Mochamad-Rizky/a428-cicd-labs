@@ -59,3 +59,5 @@ typings/
 .env
 
 submission-ci-cd.pem
+
+build

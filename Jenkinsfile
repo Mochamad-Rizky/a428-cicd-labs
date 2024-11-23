@@ -11,40 +11,41 @@ pipeline {
     }
     
     stages {
-        // stage('Build') {
-        //     steps {
-        //         sh 'npm install'
-        //     }
-        // }
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
         
-        // stage('Test') {
-        //     steps {
-        //         sh './jenkins/scripts/test.sh'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                sh './jenkins/scripts/test.sh'
+            }
+        }
         
-        // stage('Manual Approval') {
-        //     steps {
-        //         input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
-        //     }
-        // }
+        stage('Manual Approval') {
+            steps {
+                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
+            }
+        }
         
-        // stage('Deploy') {
-        //     steps {
-        //         sh './jenkins/scripts/deliver.sh'
-        //         sleep 1
-        //         sh './jenkins/scripts/kill.sh'
-        //     }
-        // }
+        stage('Deploy') {
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+                sleep 1
+                sh './jenkins/scripts/kill.sh'
+            }
+        }
         
         stage('Deploy to EC2') {
             steps {
                 sshagent(credentials: ['1d660cae-20a2-41e2-b380-ee6962a8c6c3']) {
                     // join to ec2
-                    sh '''ssh -tt -o StrictHostKeyChecking=no ubuntu@54.86.109.143 << EOF
-                    whoami
-                    exit
-                    EOF'''
+                    // sh '''ssh -tt -o StrictHostKeyChecking=no ubuntu@54.86.109.143 << EOF
+                    // whoami
+                    // exit
+                    // EOF'''
+                    sh 'scp -o StrictHostKeyChecking=no -r ./build ubuntu@54.86.109.143:/home/ubuntu/'
                 }
             }
         }
