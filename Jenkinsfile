@@ -32,7 +32,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
-                sleep time: 1, unit: 'MINUTES'
+                sleep time: 1, unit: 'SEC'
                 sh './jenkins/scripts/kill.sh'
             }
         }
@@ -45,7 +45,7 @@ pipeline {
                     def ec2_key = './submission-ci-cd.pem'
                 
                     sh """
-                    ssh -o StrictHostKeyChecking=no ${ec2_user}@${ec2_ip} << EOF
+                    ssh -i ${ec2_user}@${ec2_ip}
                     mkdir -p /home/ubuntu/app && cd /home/ubuntu/app
                     git clone https://github.com/Mochamad-Rizky/a428-cicd-labs -b react-app && cd react-app
                     npm install
