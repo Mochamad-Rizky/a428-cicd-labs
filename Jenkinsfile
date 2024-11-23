@@ -45,7 +45,7 @@ pipeline {
                     // whoami
                     // exit
                     // EOF'''
-                    sh 'scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@52.55.5.102:/tmp/react-fe && ssh -o StrictHostKeyChecking=no ubuntu@52.55.5.102 "sudo mv /tmp/react-fe/* /var/www/html/react-fe"'
+                    sh 'scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@52.55.5.102:/var/www/html/react-fe'
                 }
             }
         }
