@@ -39,7 +39,7 @@ pipeline {
         
         stage('Deploy to EC2') {
             steps {
-                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AKIAXKPUZ3MI5T3WDQ42)]) {
+                withCredentials([aws(accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'AKIAXKPUZ3MI5T3WDQ42')]) {
                     sh '''
                         aws --version
                     '''
