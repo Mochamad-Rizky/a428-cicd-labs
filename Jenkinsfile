@@ -45,7 +45,7 @@ pipeline {
                     // whoami
                     // exit
                     // EOF'''
-                    sh 'scp -o StrictHostKeyChecking=no -r ./build ubuntu@54.86.109.143:/home/ubuntu/'
+                    sh 'scp -o StrictHostKeyChecking=no -r ./build/* ubuntu@52.55.5.102:/var/www/html//var/www/html/react-fe'
                 }
             }
         }
