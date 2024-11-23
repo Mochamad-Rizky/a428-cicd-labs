@@ -43,14 +43,16 @@ pipeline {
                 def ec2_user = 'ubuntu'
                 def ec2_key = './submission-ci-cd.pem'
                 
-                sh """
-                ssh -i ${ec2_key} ${ec2_user}@${ec2_ip} << EOF
-                mkdir -p /home/ubuntu/app && cd /home/ubuntu/app
-                git clone https://github.com/Mochamad-Rizky/a428-cicd-labs -b react-app && cd react-app
-                npm install
-                npm start
-                EOF
-                """
+                sshagent(['ec2-ssh-key']) {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no ${ec2_user}@${ec2_ip} << EOF
+                    mkdir -p /home/ubuntu/app && cd /home/ubuntu/app
+                    git clone https://github.com/Mochamad-Rizky/a428-cicd-labs -b react-app && cd react-app
+                    npm install
+                    npm start
+                    EOF
+                    """
+                }
             }
         }
     }
