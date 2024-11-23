@@ -11,31 +11,31 @@ pipeline {
     }
     
     stages {
-        stage('Build') {
-            steps {
-                sh 'npm install'
-            }
-        }
+        // stage('Build') {
+        //     steps {
+        //         sh 'npm install'
+        //     }
+        // }
         
-        stage('Test') {
-            steps {
-                sh './jenkins/scripts/test.sh'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         sh './jenkins/scripts/test.sh'
+        //     }
+        // }
         
-        stage('Manual Approval') {
-            steps {
-                input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
-            }
-        }
+        // stage('Manual Approval') {
+        //     steps {
+        //         input message: 'Lanjutkan ke tahap Deploy?', ok: 'Proceed'
+        //     }
+        // }
         
-        stage('Deploy') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-                sleep 1
-                sh './jenkins/scripts/kill.sh'
-            }
-        }
+        // stage('Deploy') {
+        //     steps {
+        //         sh './jenkins/scripts/deliver.sh'
+        //         sleep 1
+        //         sh './jenkins/scripts/kill.sh'
+        //     }
+        // }
         
         stage('Deploy to EC2') {
             steps {
